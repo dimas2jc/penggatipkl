@@ -3,9 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 //home
-Route::get('/home', function () {
-    return view('gudangkacang.home');
-});
+Route::get('/home', 'gudangkacang\HomeController@index');
 
 //stock
 Route::get('/gd_kacang', function () {
