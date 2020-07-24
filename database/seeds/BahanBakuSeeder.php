@@ -30,19 +30,13 @@ class BahanBakuSeeder extends Seeder
         ]);
 
         DB::table('bahan_baku')->insert([
-            'nama' => 'Bawang Kulit',
+            'nama' => 'Bawang',
             'status'=>1,
             'id_tipe_bahan_baku'=>2
         ]);
 
         DB::table('bahan_baku')->insert([
             'nama' => 'Tepung Tapioka',
-            'status'=>1,
-            'id_tipe_bahan_baku'=>2
-        ]);
-
-        DB::table('bahan_baku')->insert([
-            'nama' => 'Bawang Kupas',
             'status'=>1,
             'id_tipe_bahan_baku'=>2
         ]);
