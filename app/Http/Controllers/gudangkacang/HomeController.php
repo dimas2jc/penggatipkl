@@ -4,7 +4,7 @@ namespace App\Http\Controllers\gudangkacang;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Pegawai;
+use App\Models\stock;
 
 class HomeController extends Controller
 {
@@ -15,7 +15,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $stock = stock::select('timestamp', 'masuk')->where('id_satuan',1,'id_gudang',9)->orderBy('timestamp','asc')->get();
+        $stock = stock::select('timestamp', 'masuk')->where(['id_satuan' => '1','id_gudang' => '9'])->orderBy('timestamp','asc')->paginate(5);
         return view('gudangkacang.home', ['stock'=>$stock]);
     }
 

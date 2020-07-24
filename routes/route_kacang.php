@@ -26,6 +26,22 @@ Route::get('/stock_gudang_kacang_penerimaan_8ml', function () {
     return view('gudangkacang.penerimaan_8ml');
 });
 
+Route::get('/stock_gudang_kacang_sortir_penerimaan_gs', function () {
+    return view('gudangkacang.penerimaan_gs');
+});
+
+Route::get('/stock_gudang_kacang_sortir_penerimaan_sp', function () {
+    return view('gudangkacang.penerimaan_sp');
+});
+
+Route::get('/stock_gudang_kacang_sortir_penerimaan_hc', function () {
+    return view('gudangkacang.penerimaan_hc');
+});
+
+Route::get('/stock_gudang_kacang_sortir_penerimaan_telor', function () {
+    return view('gudangkacang.penerimaan_telor');
+});
+
 //kerja harian
 Route::get('/hari_ini', function () {
     return view('gudangkacang.kerja_harian');
