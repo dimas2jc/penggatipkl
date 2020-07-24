@@ -15,7 +15,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $stock = stock::select('timestamp', 'masuk')->where('id_satuan','=','1','and','id_gudang','=','9')->orderBy('timestamp','asc')->get();
+        $stock = stock::select('timestamp', 'masuk')->where('id_satuan',1,'id_gudang',9)->orderBy('timestamp','asc')->get();
         return view('gudangkacang.home', ['stock'=>$stock]);
     }
 
