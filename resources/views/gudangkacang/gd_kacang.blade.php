@@ -26,6 +26,11 @@ Stock
                 </ol>
             </div>
         </div>
+        <div class="col-md-4 col-lg-4">
+            <div class="widgetbar">
+                <?php echo date("d-m-Y"); ?>
+            </div>                        
+        </div>
     </div>          
 </div>
 <!-- End Breadcrumbbar -->

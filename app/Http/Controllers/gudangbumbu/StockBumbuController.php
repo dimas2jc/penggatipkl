@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\gudangkacang;
+namespace App\Http\Controllers\gudangbumbu;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\stock;
+use Illuminate\Support\Facades\DB;
+use App\Models\Stock;
 
-class HomeController extends Controller
+class StockBumbuController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,12 +16,24 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $stockob = stock::select('timestamp', 'masuk')->where(['id_satuan' => '1','id_gudang' => '9'])->orderBy('timestamp','asc')->paginate(5);
-        $stock7ml = stock::select('timestamp', 'masuk')->where(['id_satuan' => '1','id_gudang' => '9'])->orderBy('timestamp','asc')->paginate(5);
-        $stock8ml = stock::select('timestamp', 'masuk')->where(['id_satuan' => '1','id_gudang' => '9'])->orderBy('timestamp','asc')->paginate(5);
-        return view('gudangkacang.home', ['stock'=>$stockob, 'stock'=>$stock7ml, 'stock'=>$stock8ml]);
+        $stock= \App\Models\Stock::all();
+     return view('gudangbumbu.bahan', ['stock' => $stock]);
+     return view('gudangbumbu.adonangulagaram', ['stock' => $stock]);
     }
 
+    public function indexbahan()
+    {
+        $stock= \App\Models\Stock::all();
+     
+     return view('gudangbumbu.bahan', ['stock' => $stock]);
+    }
+
+    public function indexgulagaram()
+    {
+        $stock= \App\Models\Stock::all();
+     
+     return view('gudangbumbu.adonangulagaram', ['stock' => $stock]);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -39,7 +52,14 @@ class HomeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Stock::create($request->all());
+        return redirect('/gudang-bumbu/bahan')->with('status', 'data berhasil ditambahkan');
+    }
+
+    public function store(Request $request)
+    {
+        Stock::create($request->all());
+        return redirect('/gudang-bumbu/adonangulagaram')->with('status', 'data berhasil ditambahkan');
     }
 
     /**
@@ -86,4 +106,10 @@ class HomeController extends Controller
     {
         //
     }
+    public function tambah()
+    {
+        //
+    }
+
+
 }

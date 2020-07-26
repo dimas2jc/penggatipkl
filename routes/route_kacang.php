@@ -50,7 +50,3 @@ Route::get('/hari_ini', function () {
 Route::get('/hari_sebelumnya', function () {
     return view('gudangkacang.kerja_harian_sebelumnya');
 });
-
-Route::get('/tutup', function () {
-    return view('gudangkacang.review_harian');
-});
