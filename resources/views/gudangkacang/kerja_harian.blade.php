@@ -10,6 +10,11 @@ Kerja Harian
 <!-- Slick css -->
 <link href="{{ asset('assets/plugins/slick/slick.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('assets/plugins/slick/slick-theme.css') }}" rel="stylesheet" type="text/css" />
+<!-- Online -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
 @endsection 
 @section('rightbar-content')
 
@@ -57,7 +62,7 @@ Kerja Harian
                             <div class="tab-content" id="defaultTabJustifiedContent">
                                 <div class="tab-pane fade show active text-center" id="home-justified" role="tabpanel" aria-labelledby="home-tab-justified">
                                     <button type="button" class="btn btn-primary" style="margin-right: 10px;" onclick="show()">Tambah Grup</button>
-                                    <button type="button" class="btn btn-warning" style="margin-left: 10px;" data-toggle="modal" data-target="#exampleModalLong">Tutup Hari</button>
+                                    <button type="button" class="btn btn-warning" onclick="y()" id="tutuphari" style="margin-left: 10px;" data-toggle="modal" data-target="#exampleModalLong">Tutup Hari</button>
                                     <div class="row" style="margin-top: 20px;">
                                     <div class="col-sm-12">
                                         <table id="datatable-buttons" class="table table-striped table-bordered dataTable no-footer dtr-inline" role="grid" aria-describedby="datatable-buttons_info">
@@ -70,13 +75,6 @@ Kerja Harian
                                                     <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 50px; text-align: center" aria-label="Telor: activate to sort column ascending">Telor</th>
                                             </thead>
                                             <tbody>
-                                                <tr role="row" class="odd">
-                                                    <td>Karung Full</td>
-                                                    <td>-</td>
-                                                    <td>-</td>
-                                                    <td>-</td>
-                                                    <td>-</td>
-                                                </tr>
                                                 <tr role="row">
                                                     <td>Tidak Full (Kg)</td>
                                                     <td>-</td>
@@ -119,7 +117,7 @@ Kerja Harian
                                                             <!-- </div> -->
                                                         </div>
                                                         <br>
-                                                        <table id="datatable-buttons" class="table table-striped table-bordered dataTable no-footer dtr-inline" role="grid" aria-describedby="datatable-buttons_info">
+                                                        <table id="review_penerimaan" class="table table-striped table-bordered dataTable no-footer dtr-inline" role="grid" aria-describedby="datatable-buttons_info">
                                                             <thead>
                                                                 <tr role="row">
                                                                 <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 100px; text-align: center" aria-sort="ascending" aria-label="Penerimaan: activate to sort column descending">Penerimaan</th>
@@ -129,10 +127,10 @@ Kerja Harian
                                                             </thead>
                                                             <tbody>
                                                                 <tr role="row">
-                                                                    <td>Karung</td>
-                                                                    <td>10</td>
-                                                                    <td>7</td>
-                                                                    <td>0</td>
+                                                                    <td>Kilogram</td>
+                                                                    <td id="p_ob"></td>
+                                                                    <td id="p_hc"></td>
+                                                                    <td id="p_8ml"></td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
@@ -150,26 +148,12 @@ Kerja Harian
                                                                 <th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" style="width: 50px; text-align: center" aria-label="Telor: activate to sort column ascending">Telor</th>
                                                         </thead>
                                                         <tbody>
-                                                            <tr role="row" class="odd">
-                                                                <td>Karung Full</td>
-                                                                <td>-</td>
-                                                                <td>-</td>
-                                                                <td>-</td>
-                                                                <td>-</td>
-                                                            </tr>
-                                                                <tr role="row">
-                                                                    <td>Tidak Full (Kg)</td>
-                                                                    <td>-</td>
-                                                                    <td>-</td>
-                                                                    <td>-</td>
-                                                                    <td>-</td>
-                                                                </tr>
                                                                 <tr role="row">
                                                                     <td>Total (Kg)</td>
-                                                                    <td>-</td>
-                                                                    <td>-</td>
-                                                                    <td>-</td>
-                                                                    <td>-</td>
+                                                                    <td id="h_gs"></td>
+                                                                    <td id="h_sp"></td>
+                                                                    <td id="h_hc"></td>
+                                                                    <td id="h_telor"></td>
                                                                 </tr>
                                                                 <tr role="row">
                                                                     <td>BS (Kg)</td>
@@ -193,11 +177,11 @@ Kerja Harian
                                                                 </thead>
                                                                     <tbody>
                                                                         <tr role="row" class="odd">
-                                                                            <td>Karung</td>
-                                                                            <td>4</td>
-                                                                            <td>6</td>
-                                                                            <td>6</td>
-                                                                            <td>-</td>
+                                                                            <td>Kilogram</td>
+                                                                            <td id="pi_gs"></td>
+                                                                            <td id="pi_sp"></td>
+                                                                            <td id="pi_hc"></td>
+                                                                            <td id="pi_telor"></td>
                                                                         </tr>
                                                                     </tbody>
                                                                 </table>
@@ -296,26 +280,26 @@ Kerja Harian
                                                 <thead>
                                                     <tr>
                                                         <th>Grup I<br>Penerimaan</th>
-                                                        <th>Berisi <input type="number" id="inputmask-card-number" name="org_dlm_grup" style="width: 25%"> Orang</th>
+                                                        <th>Berisi <input type="number" id="jml_pekerja" name="org_dlm_grup" style="width: 25%"> Orang</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Tambah Penerimaan</button></td>
+                                                        <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPenerimaan">Tambah Penerimaan</button></td>
                                                         <td>
                                                         <div class="table-responsive">
-                                                            <table class="table">
+                                                            <table class="table" id="pen">
                                                                 <thead class="thead-light">
                                                                     <tr>
                                                                         <th>Jenis Kacang</th>
-                                                                        <th>Jumlah Karung</th>
+                                                                        <th>Jumlah Kg</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    <tr>
+                                                                    <!-- <tr>
                                                                         <td></td>
                                                                         <td></td>
-                                                                    </tr>
+                                                                    </tr> -->
                                                                 </tbody>
                                                             </table>          
                                                         </div>
@@ -364,30 +348,33 @@ Kerja Harian
                                                 </table>
                                             </div>
                                         </div>
-                                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" style="display: none;" aria-hidden="true">
+                                        <div class="modal fade" id="addPenerimaan" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" style="display: none;" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-body text-center">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                                </button>
                                                         <h5>Tambah Penerimaan</h5>
                                                         <div class="table-responsive">
                                                             <table class="table table-borderless">
                                                                 <thead>
                                                                     <tr>
                                                                         <th scope="col">Jenis Kacang<br>
-                                                                            <select name="jenis_kc">
-                                                                                <option>OB</option>
-                                                                                <option>HC</option>
-                                                                                <option>8ML</option>
+                                                                            <select name="jenis_kc" id="jns_kcg">
+                                                                                <option value="OB">OB</option>
+                                                                                <option value="HC">HC</option>
+                                                                                <option value="8ML">8ML</option>
                                                                             </select>
                                                                         </th>
-                                                                        <th scope="col">Jumlah Karung<br><input type="number" class="form-control" id="jml_karung" name="jml_karung"></th>
+                                                                        <th scope="col">Jumlah Kilogram<br><input type="number" class="form-control" id="jml_kg" name="jml_kg"></th>
                                                                     </tr>
                                                                 </thead>
                                                             </table>  
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-primary">Simpan</button>
+                                                        <button type="button" class="btn btn-primary" onclick="x()" id="save-penerimaan">Simpan</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -415,25 +402,25 @@ Kerja Harian
                                                                 <th scope="row">GS<br><button type="button" class="btn btn-info" id="plussortirgs" onclick="sgs()">+</button><br>
                                                                 <button type="button" class="btn btn-danger" id="minsortirgs" onclick="msgs()" style="margin-top: 5px; height: 19px; padding-top: 0px; padding-bottom: 0px; width: 46px; margin-bottom: 0px;">-</button>
                                                                 </th>
-                                                                <td>Jumlah Karung<br><input type="number" class="form-control" id="sortirgs" name="GS"></td>
+                                                                <td>Jumlah Kilogram<br><input type="number" class="form-control" id="sortirgs" name="GS"></td>
                                                             </tr>
                                                             <tr>
                                                                 <th scope="row">SP<br><button type="button" class="btn btn-info" id="plussortirsp" onclick="ssp()">+</button><br>
                                                                 <button type="button" class="btn btn-danger" id="minsortirsp" onclick="mssp()" style="margin-top: 5px; height: 19px; padding-top: 0px; padding-bottom: 0px; width: 46px; margin-bottom: 0px;">-</button>
                                                                 </th>
-                                                                <td>Jumlah Karung<br><input type="number" class="form-control" id="sortirsp" name="SP"></td>
+                                                                <td>Jumlah Kilogram<br><input type="number" class="form-control" id="sortirsp" name="SP"></td>
                                                             </tr>
                                                             <tr>
                                                                 <th scope="row">HC<br><button type="button" class="btn btn-info" id="plussortirhc" onclick="shc()">+</button><br>
                                                                 <button type="button" class="btn btn-danger" id="minsortirhc" onclick="mshc()" style="margin-top: 5px; height: 19px; padding-top: 0px; padding-bottom: 0px; width: 46px; margin-bottom: 0px;">-</button>
                                                                 </th>
-                                                                <td>Jumlah Karung<br><input type="number" class="form-control" id="sortirhc" name="HC"></td>
+                                                                <td>Jumlah Kilogram<br><input type="number" class="form-control" id="sortirhc" name="HC"></td>
                                                             </tr>
                                                             <tr>
                                                                 <th scope="row">Telor<br><button type="button" class="btn btn-info" id="plussortirtelor" onclick="stelor()">+</button><br>
                                                                 <button type="button" class="btn btn-danger" id="minsortirtelor" onclick="mstelor()" style="margin-top: 5px; height: 19px; padding-top: 0px; padding-bottom: 0px; width: 46px; margin-bottom: 0px;">-</button>
                                                                 </th>
-                                                                <td>Jumlah Karung<br><input type="number" class="form-control" id="sortirtelor" name="Telor"></td>
+                                                                <td>Jumlah Kilogram<br><input type="number" class="form-control" id="sortirtelor" name="Telor"></td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -455,6 +442,50 @@ Kerja Harian
 @endsection 
 @section('script')
 <script>
+
+        function x(){
+            var select = document.getElementById('jns_kcg');
+            var jml = document.getElementById('jml_kg');
+            
+            var table = document.getElementById('pen');
+            var row = table.insertRow(table.rows.length);
+
+            var cell_1 = row.insertCell(0);
+            var cell_2 = row.insertCell(1);
+
+            cell_1.innerHTML = select.value;
+            cell_2.innerHTML = jml.value;
+            if(select.value=="OB"){
+                document.getElementById('p_ob').innerHTML = jml.value;
+            }else if(select.value=="HC"){
+                document.getElementById('p_hc').innerHTML = jml.value;
+            }else if(select.value=="8ML"){
+                document.getElementById('p_8ml').innerHTML = jml.value;
+            }
+        }
+
+        function y(){
+            var gs = document.getElementById('jmlgs');
+            var sp = document.getElementById('jmlsp');
+            var hc = document.getElementById('jmlhc');
+            var telor = document.getElementById('jmltelor');
+
+            document.getElementById('h_gs').innerHTML = gs.value;
+            document.getElementById('h_sp').innerHTML = sp.value;
+            document.getElementById('h_hc').innerHTML = hc.value;
+            document.getElementById('h_telor').innerHTML = telor.value;
+
+            var strgs = document.getElementById('sortirgs');
+            var strsp = document.getElementById('sortirsp');
+            var strhc = document.getElementById('sortirhc');
+            var strtelor = document.getElementById('sortirtelor');
+
+            document.getElementById('pi_gs').innerHTML = strgs.value;
+            document.getElementById('pi_sp').innerHTML = strsp.value;
+            document.getElementById('pi_hc').innerHTML = strhc.value;
+            document.getElementById('pi_telor').innerHTML = strtelor.value;
+        }
+
 
     function show() {
         var table = document.getElementById("addgrup");
@@ -854,4 +885,5 @@ function mstelor(){
 <script src="{{ asset('assets/plugins/slick/slick.min.js') }}"></script>
 <!-- Custom Dashboard js -->  
 <script src="{{ asset('assets/js/custom/custom-dashboard.js') }}"></script>
+
 @endsection 
