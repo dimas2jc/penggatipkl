@@ -42,7 +42,8 @@ Input Penerimaan Kacang OB
                     <h5 class="card-title">Input Penerimaan Kacang OB</h5>
                 </div>
                 <div class="card-body">
-                    <form>
+                    <form action="/insert_stock_gudang_kacang_penerimaan_ob" method="post">
+                    {{ csrf_field() }}
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label for="tanggal">Tanggal Sekarang</label>

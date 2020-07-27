@@ -26,11 +26,6 @@ Stock
                 </ol>
             </div>
         </div>
-        <div class="col-md-4 col-lg-4">
-            <div class="widgetbar">
-                <?php echo date("d-m-Y"); ?>
-            </div>                        
-        </div>
     </div>          
 </div>
 <!-- End Breadcrumbbar -->
@@ -113,42 +108,16 @@ Stock
                                       
                                         </thead>
                                         <tbody>
+                                        @foreach($ob as $stockob)
                                             <tr>
-                                                <td>05/06/20</td>
-                                                <td>10 Juni 2020</td>
-                                                <td>Dari Coolstorage I</td>
-                                                <td>50</td>
-                                                <td>-</td>
-                                                <td>50</td>
+                                                <td>{{$stockob->stock.timestamp}}</td>
+                                                <td>{{$stockob->penerimaan.timestamp}}</td>
+                                                <td>{{$stockob->stock.keterangan}}</td>
+                                                <td>{{$stockob->stock.masuk}}</td>
+                                                <td>{{$stockob->stock.keluar}}</td>
+                                                <td>{{$stockob->stock.stock}}</td>
                                             </tr>
-                                           
-                                            <tr>
-                                                <td>05/06/20</td>
-                                                <td>12 Juni 2020</td>
-                                                <td>Proses Sortir</td>
-                                                <td>-</td>
-                                                <td>20</td>
-                                                <td>10</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>06/06/20</td>
-                                                <td>10 Juni 2020</td>
-                                                <td>Proses Sortir</td>
-                                                <td>-</td>
-                                                <td>20</td>
-                                                <td>30</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>06/06/20</td>
-                                                <td>10 Juni 2020</td>
-                                                <td>Proses Sortir</td>
-                                                <td>-</td>
-                                                <td>10</td>
-                                                <td>20</td>
-                                            </tr>
-
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -212,32 +181,16 @@ Stock
                                       
                                         </thead>
                                         <tbody>
+                                        @foreach($tujuhML as $stock7ml)
                                             <tr>
-                                                <td>06/06/20</td>
-                                                <td>12 Juni 2020</td>
-                                                <td>Proses Sortir</td>
-                                                <td>-</td>
-                                                <td>20</td>
-                                                <td>10</td>
+                                                <td>{{$stock7ml->stock.timestamp}}</td>
+                                                <td>{{$stock7ml->penerimaan.timestamp}}</td>
+                                                <td>{{$stock7ml->stock.keterangan}}</td>
+                                                <td>{{$stock7ml->stock.masuk}}</td>
+                                                <td>{{$stock7ml->stock.keluar}}</td>
+                                                <td>{{$stock7ml->stock.stock}}</td>
                                             </tr>
-
-                                            <tr>
-                                                <td>07/06/20</td>
-                                                <td>10 Juni 2020</td>
-                                                <td>Proses Sortir</td>
-                                                <td>-</td>
-                                                <td>10</td>
-                                                <td>20</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>07/06/20</td>
-                                                <td>11 Juni 2020</td>
-                                                <td>Proses Sortir</td>
-                                                <td>-</td>
-                                                <td>10</td>
-                                                <td>40</td>
-                                            </tr>
+                                        @endforeach
 
                                         </tbody>
                                     </table>
@@ -301,24 +254,16 @@ Stock
                                       
                                         </thead>
                                         <tbody>
+                                        @foreach($delapanML as $stock8ml)
                                             <tr>
-                                                <td>07/06/20</td>
-                                                <td>10 Juni 2020</td>
-                                                <td>Proses Sortir</td>
-                                                <td>-</td>
-                                                <td>20</td>
-                                                <td>30</td>
+                                                <td>{{$stock8ml->stock.timestamp}}</td>
+                                                <td>{{$stock8ml->penerimaan.timestamp}}</td>
+                                                <td>{{$stock8ml->stock.keterangan}}</td>
+                                                <td>{{$stock8ml->stock.masuk}}</td>
+                                                <td>{{$stock8ml->stock.keluar}}</td>
+                                                <td>{{$stock8ml->stock.stock}}</td>
                                             </tr>
-
-                                            <tr>
-                                                <td>09/06/20</td>
-                                                <td>10 Juni 2020</td>
-                                                <td>Proses Sortir</td>
-                                                <td>-</td>
-                                                <td>10</td>
-                                                <td>20</td>
-                                            </tr>
-
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </div>

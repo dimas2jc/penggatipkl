@@ -6,9 +6,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/home', 'gudangkacang\HomeController@index');
 
 //stock
-Route::get('/gd_kacang', function () {
-    return view('gudangkacang.gd_kacang');
-});
+Route::get('/gd_kacang', 'gudangkacang\StockGdKacangController@select');
 
 Route::get('/gd_kacang_sortir', function () {
     return view('gudangkacang.gd_kacang_sortir');
@@ -17,6 +15,8 @@ Route::get('/gd_kacang_sortir', function () {
 Route::get('/stock_gudang_kacang_penerimaan_ob', function () {
     return view('gudangkacang.penerimaan_ob');
 });
+
+Route::post('/insert_stock_gudang_kacang_penerimaan_ob', 'gudangkacang\StockGdKacangController@insertOB');
 
 Route::get('/stock_gudang_kacang_penerimaan_7ml', function () {
     return view('gudangkacang.penerimaan_7ml');
@@ -49,4 +49,8 @@ Route::get('/hari_ini', function () {
 
 Route::get('/hari_sebelumnya', function () {
     return view('gudangkacang.kerja_harian_sebelumnya');
+});
+
+Route::get('/tutup', function () {
+    return view('gudangkacang.review_harian');
 });
