@@ -63,6 +63,13 @@ class GudangTepungTapiokaController extends Controller
     	//->where('tanggal_order_masak','>=',date('Y-m-d'))
         ->get();
 
+        $ordermasak2 = OrderMasak::select('order_masak.*','dom.jumlah AS jumlah')
+    	->join('detail_order_masak AS dom', function ($join) {
+            $join->on('order_masak.id_order_masak', '=', 'dom.id_order_masak')
+                 ->where('dom.id_bahan_product', '=', 'PR00000000006');
+		})
+		->get();
+
         $stock1a = DB::table('stock')->where('id_bahan_baku', '=', 'BB000000007')->where('id_satuan', '=', 1)->sum('masuk');
         $stock1b = DB::table('stock')->where('id_bahan_baku', '=', 'BB000000007')->where('id_satuan', '=', 1)->sum('keluar');
         $stock1c = $stock1a - $stock1b;
@@ -71,6 +78,38 @@ class GudangTepungTapiokaController extends Controller
         $stock2c = $stock2a - $stock2b;       
         
         return view('gudangtepungtapioka.kerjaharian', ['stock1c' => $stock1c, 'stock2c' => $stock2c, 'ordermasak' => $ordermasak]);
+    }
+
+    public function store(Request $request)
+    {
+        // insert data ke table
+        DB::table('stock')->insert([
+            'id_satuan' => 1,
+            'id_transaksi' => 1,
+            'id_bahan_baku' => 'BB000000007',
+            'keterangan' => 'Diambil',
+            'masuk' => 0,
+            'keluar' => $request->berat,
+            'id_gudang' => 5
+    ]);
+    // alihkan halaman ke halaman kategori
+    return redirect('gudang-tepung-tapioka/kerjaharian');
+    }
+
+    public function store2(Request $request)
+    {
+        // insert data ke table
+        DB::table('stock')->insert([
+            'id_satuan' => 2,
+            'id_transaksi' => 1,
+            'id_bahan_baku' => 'BB000000007',
+            'keterangan' => 'Hasil Tambah Packing',
+            'masuk' => $request->hasilpack,
+            'keluar' => 0,
+            'id_gudang' => 6
+    ]);
+    // alihkan halaman ke halaman kategori
+    return redirect('gudang-tepung-tapioka/kerjaharian');
     }
 
 }
